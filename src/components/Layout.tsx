@@ -71,7 +71,7 @@ const Layout = () => {
             <nav className="hidden lg:flex items-center gap-8">
               {/* Services Dropdown */}
               <div 
-                className="relative"
+                className="relative group"
                 onMouseEnter={() => setIsServicesOpen(true)}
                 onMouseLeave={() => setIsServicesOpen(false)}
               >
@@ -80,19 +80,21 @@ const Layout = () => {
                   <ChevronDown className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {isServicesOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-56 bg-[var(--slate-900)] border border-[var(--slate-800)] rounded-xl shadow-2xl py-2 animate-fade-in">
-                    {serviceDropdown.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.path}
-                        className="block px-4 py-2.5 text-sm text-[var(--slate-400)] hover:text-white hover:bg-[var(--slate-800)] transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
+                  <div className="absolute top-full left-0 pt-2 w-56 animate-fade-in">
+                    <div className="bg-[var(--slate-900)] border border-[var(--slate-800)] rounded-xl shadow-2xl py-2">
+                      {serviceDropdown.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={item.path}
+                          className="block px-4 py-2.5 text-sm text-[var(--slate-400)] hover:text-white hover:bg-[var(--slate-800)] transition-colors"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
-              </div>
+              </div>      
 
               {navLinks.slice(1).map((link) => (
                 <Link

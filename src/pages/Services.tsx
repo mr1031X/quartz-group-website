@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   ArrowRight, 
   ChevronDown,
@@ -19,6 +19,25 @@ const Services = () => {
   const toggleFaq = (id: string) => {
     setOpenFaq(openFaq === id ? null : id);
   };
+
+  const location = useLocation();
+
+  // Handle hash-based scrolling
+  useEffect(() => {
+    const scrollToSection = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.getElementById(hash.substring(1));
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 150);
+        }
+      }
+    };
+
+  scrollToSection();
+}, [location]); // Re-run when location changes (including hash)
 
   const services = [
     {
