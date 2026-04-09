@@ -261,7 +261,7 @@ const Industries = () => {
       <section className="section-hero pt-32 pb-20 relative">
         <div className="absolute inset-0">
           <img 
-            src="/images/manufacturing-line.jpg" 
+            src="/images/stats-image.jpg" 
             alt="Modern manufacturing facility" 
             className="w-full h-full object-cover"
           />

@@ -6,6 +6,7 @@ const Layout = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -23,9 +24,7 @@ const Layout = () => {
   }, [location]);
 
   const navLinks = [
-    { name: 'Services', path: '/services' },
     { name: 'Industries', path: '/industries' },
-    { name: 'About', path: '/about' },
     { name: 'Blog', path: '/blog' },
   ];
 
@@ -35,6 +34,11 @@ const Layout = () => {
     { name: 'Optimization', path: '/services#optimization' },
     { name: 'Support', path: '/services#support' },
     { name: 'Upgrades', path: '/services#upgrades' },
+  ];
+
+  const aboutDropdown = [
+    { name: 'Our Story', path: '/about' },
+    { name: 'Our Team', path: '/about#team' },
   ];
 
   const isActive = (path: string) => {
@@ -56,12 +60,10 @@ const Layout = () => {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3">
-              {/* <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--electric-blue)] to-[var(--cyan-glow)] flex items-center justify-center">
-                <span className="text-white font-bold text-xl">Q</span>
-              </div> */}
               <div className="w-10 h-10 bg-transparent rounded-lg flex items-center justify-center">
                 <img src="/images/quartz-logo.png" alt="" className="h-8 w-auto" />
               </div>
+
               <div className="hidden sm:block">
                 <span className="text-white font-bold text-lg tracking-tight">Quartz Group</span>
               </div>
@@ -71,7 +73,7 @@ const Layout = () => {
             <nav className="hidden lg:flex items-center gap-8">
               {/* Services Dropdown */}
               <div 
-                className="relative group"
+                className="relative"
                 onMouseEnter={() => setIsServicesOpen(true)}
                 onMouseLeave={() => setIsServicesOpen(false)}
               >
@@ -94,9 +96,36 @@ const Layout = () => {
                     </div>
                   </div>
                 )}
-              </div>      
+              </div>
 
-              {navLinks.slice(1).map((link) => (
+              {/* About Dropdown */}
+              <div 
+                className="relative"
+                onMouseEnter={() => setIsAboutOpen(true)}
+                onMouseLeave={() => setIsAboutOpen(false)}
+              >
+                <button className={`flex items-center gap-1 nav-link ${isActive('/about') ? 'text-white' : ''}`}>
+                  About
+                  <ChevronDown className={`w-4 h-4 transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {isAboutOpen && (
+                  <div className="absolute top-full left-0 pt-2 w-56 animate-fade-in">
+                    <div className="bg-[var(--slate-900)] border border-[var(--slate-800)] rounded-xl shadow-2xl py-2">
+                      {aboutDropdown.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={item.path}
+                          className="block px-4 py-2.5 text-sm text-[var(--slate-400)] hover:text-white hover:bg-[var(--slate-800)] transition-colors"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
@@ -154,7 +183,19 @@ const Layout = () => {
                 ))}
               </div>
               <div className="border-t border-[var(--slate-800)] pt-4 space-y-2">
-                {navLinks.slice(1).map((link) => (
+                <p className="text-micro px-4">About</p>
+                {aboutDropdown.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    className="block px-4 py-3 text-white hover:bg-[var(--slate-800)] rounded-lg transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+              <div className="border-t border-[var(--slate-800)] pt-4 space-y-2">
+                {navLinks.map((link) => (
                   <Link
                     key={link.name}
                     to={link.path}
@@ -195,11 +236,8 @@ const Layout = () => {
             {/* Brand Column */}
             <div className="lg:col-span-2">
               <Link to="/" className="flex items-center gap-3 mb-6">
-                {/* <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--electric-blue)] to-[var(--cyan-glow)] flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">Q</span>
-                </div> */}
-                {/* <span className="text-white font-bold text-lg">Quartz Group</span> */}
-                                <img src="/images/quartzlogoinverse-201x36bw.png" alt="The Quartz Group Logo" className="h-10 w-auto" />
+                <img src="/images/quartzlogoinverse-201x36bw.png" alt="The Quartz Group Logo" className="h-10 w-auto" />
+                <span className="text-white font-bold text-lg">Quartz Group</span>
               </Link>
               <p className="text-[var(--slate-400)] mb-6 max-w-sm">
                 The most technically sophisticated Epicor implementation partner in North America. 
@@ -233,7 +271,7 @@ const Layout = () => {
             <div>
               <h4 className="text-micro mb-4">Company</h4>
               <ul className="space-y-3">
-                {['About', 'Industries', 'Testimonials', 'Blog', 'Contact'].map((item) => (
+                {['About', 'Team', 'Industries', 'Testimonials', 'Blog', 'Contact'].map((item) => (
                   <li key={item}>
                     <Link to={`/${item.toLowerCase()}`} className="text-[var(--slate-400)] hover:text-white transition-colors text-sm">
                       {item}

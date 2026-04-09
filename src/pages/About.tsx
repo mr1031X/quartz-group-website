@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { 
   ArrowRight, 
   Check,
@@ -12,6 +13,24 @@ import {
 } from 'lucide-react';
 
 const About = () => {
+  const location = useLocation();
+
+  // Handle hash-based scrolling
+  useEffect(() => {
+    const scrollToSection = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.getElementById(hash.substring(1));
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 150);
+        }
+      }
+    };
+
+    scrollToSection();
+  }, [location]);
   const values = [
     {
       icon: Target,
@@ -91,6 +110,12 @@ const About = () => {
             </p>
           </div>
         </div>
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+          <div className="w-6 h-10 border-2 border-[var(--slate-600)] rounded-full flex justify-center pt-2">
+            <div className="w-1.5 h-3 bg-[var(--slate-400)] rounded-full animate-bounce"></div>
+          </div>
+        </div>
       </section>
 
       {/* ============================================
@@ -113,7 +138,7 @@ const About = () => {
       {/* ============================================
           [STORY SECTION — Two Column with Image]
           ============================================ */}
-      <section className="section-dark relative overflow-hidden">
+      <section id="story" className="section-dark relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full">
           <img 
             src="/images/team-walkthrough.jpg" 
@@ -170,7 +195,7 @@ const About = () => {
       {/* ============================================
           [VALUES SECTION — Light Band]
           ============================================ */}
-      <section className="section-light">
+      <section id="values" className="section-light">
         <div className="container-premium">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-micro text-[var(--slate-600)] mb-4 block">Our Values</span>
@@ -258,7 +283,7 @@ const About = () => {
       {/* ============================================
           [TEAM SECTION — Light Band with Full Team]
           ============================================ */}
-      <section className="section-light">
+      <section id="team" className="section-light">
         <div className="container-premium">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-micro text-[var(--slate-600)] mb-4 block">Our Team</span>
@@ -283,13 +308,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Adam Everett</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Project Manager</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">PMP certified. Adam has over 15 years experience in software development, management, and delivery.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">PMP certified. Adam has over 15 years experience in software development, management, and delivery.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -303,13 +328,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Adam Maggied</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Consultant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Epicor Manufacturing and Distribution certified consultant. RFID Professional Institute certified associate. Adam has over 15 years of experience in information technology and ERP systems implementations.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Epicor Manufacturing and Distribution certified consultant. RFID Professional Institute certified associate. Adam has over 15 years of experience in information technology and ERP systems implementations.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -323,13 +348,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Alejandra Arevalo</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Consultant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Experienced ERP consultant with deep expertise in manufacturing and distribution implementations.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Experienced ERP consultant with deep expertise in manufacturing and distribution implementations.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -343,13 +368,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Asit Nagpal</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Consultant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Technical consultant specializing in Epicor implementations with expertise in system configuration and optimization.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Technical consultant specializing in Epicor implementations with expertise in system configuration and optimization.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -363,13 +388,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Audrey Mann-Monasmith</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Custom Solutions Group Manager</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Managing custom development projects and leading the technical solutions team.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Managing custom development projects and leading the technical solutions team.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -383,13 +408,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Brittney Caine</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Accounting & Administrative Assistant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Supporting accounting and administrative operations to keep the team running smoothly.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Supporting accounting and administrative operations to keep the team running smoothly.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -403,13 +428,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Chris Smalley</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Director, RFID Product Development</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Leading our RFID initiatives and Xemelgo partnership. Chris drives innovation in real-time inventory tracking solutions.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Leading our RFID initiatives and Xemelgo partnership. Chris drives innovation in real-time inventory tracking solutions.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -423,13 +448,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Denise Lang</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Finance Consultant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Denise has over 10 years experience in ERP system implementation and consulting with a focus on finance modules and cost flow.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Denise has over 10 years experience in ERP system implementation and consulting with a focus on finance modules and cost flow.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -443,13 +468,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Don Agostino</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Consultant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Don has 33 years of experience in manufacturing and manufacturing software consulting. His work focuses on scheduling and advanced scheduling, job tracking and costing, MRP and planning, Epicor tools and financials.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Don has 33 years of experience in manufacturing and manufacturing software consulting. His work focuses on scheduling and advanced scheduling, job tracking and costing, MRP and planning, Epicor tools and financials.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -463,13 +488,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Don Blain</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Operations Consultant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Specializing in operational efficiency and process optimization for manufacturing and distribution clients.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Specializing in operational efficiency and process optimization for manufacturing and distribution clients.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -483,13 +508,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Don Luoto</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Consultant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Epicor Manufacturing and Distribution certified consultant. Don has been consulting on Epicor products since 1996 and is currently implementing and supporting Kinetic, Epicor 10, Epicor 9 and Vantage 8.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Epicor Manufacturing and Distribution certified consultant. Don has been consulting on Epicor products since 1996 and is currently implementing and supporting Kinetic, Epicor 10, Epicor 9 and Vantage 8.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -503,13 +528,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">George Esber</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Operations Consultant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Focused on streamlining operations and improving efficiency for manufacturing clients.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Focused on streamlining operations and improving efficiency for manufacturing clients.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -523,13 +548,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Jason Campbell</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Consultant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Experienced in complex ERP implementations across multiple industries with expertise in manufacturing and distribution.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Experienced in complex ERP implementations across multiple industries with expertise in manufacturing and distribution.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -543,13 +568,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Jay Paquette</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Project Manager</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Jay has over 20 years of experience in deploying enterprise application software with focus on Manufacturing (process and discrete) and Distribution companies. Innovative professional with dynamic implementation skills.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Jay has over 20 years of experience in deploying enterprise application software with focus on Manufacturing (process and discrete) and Distribution companies. Innovative professional with dynamic implementation skills.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -563,13 +588,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Jennifer Guhlin</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Technical Consultant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Technical consultant with expertise in Epicor configuration and system optimization.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Technical consultant with expertise in Epicor configuration and system optimization.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -583,13 +608,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Ken Adams</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Application Support Specialist</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Application support specialist with deep Epicor knowledge and troubleshooting expertise.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Application support specialist with deep Epicor knowledge and troubleshooting expertise.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -603,13 +628,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Matt Hellwig</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">President</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Epicor Manufacturing and Distribution certified consultant. Matt has over 25 years of experience in manufacturing and distribution software consulting. RFID Professional Institute certified associate.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Epicor Manufacturing and Distribution certified consultant. Matt has over 25 years of experience in manufacturing and distribution software consulting. RFID Professional Institute certified associate.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -623,13 +648,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Matt McIntosh</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Consultant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Matt has nearly 20 years of hands-on experience in implementing, stabilizing, and optimizing Epicor ERP environments across manufacturing, distribution, and aerospace & defense organizations.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Matt has nearly 20 years of hands-on experience in implementing, stabilizing, and optimizing Epicor ERP environments across manufacturing, distribution, and aerospace & defense organizations.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -643,13 +668,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Mike Gerbi</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Developer</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Epicor Tools & Technical certified consultant. Mike specializes in custom development and technical solutions.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Epicor Tools & Technical certified consultant. Mike specializes in custom development and technical solutions.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -663,13 +688,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Ron Stevenson</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Financial Consultant</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Expert in Epicor financial modules with deep knowledge of cost accounting and financial reporting.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Expert in Epicor financial modules with deep knowledge of cost accounting and financial reporting.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
@@ -683,13 +708,13 @@ const About = () => {
               <div className="p-5">
                 <h4 className="text-lg font-semibold text-[var(--deep-navy)] group-hover:text-[var(--electric-blue)] transition-colors">Sean McDaniel</h4>
                 <p className="text-[var(--electric-blue)] text-sm font-medium">Senior Software Engineer</p>
-                <p className="text-[var(--slate-500)] text-sm mt-3 line-clamp-4">Epicor Tools & Technical certified consultant. Sean develops custom solutions and integrations for complex client needs.</p>
+                <p className="text-gray-700 text-sm mt-3 line-clamp-4">Epicor Tools & Technical certified consultant. Sean develops custom solutions and integrations for complex client needs.</p>
                 <div className="flex gap-2 mt-4">
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Linkedin className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Linkedin className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                   <button className="w-8 h-8 rounded-lg bg-[var(--slate-100)] flex items-center justify-center hover:bg-[var(--electric-blue)] transition-colors group/btn">
-                    <Mail className="w-4 h-4 text-[var(--slate-500)] group-hover/btn:text-white" />
+                    <Mail className="w-4 h-4 text-gray-700 group-hover/btn:text-white" />
                   </button>
                 </div>
               </div>
