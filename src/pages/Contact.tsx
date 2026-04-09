@@ -29,13 +29,32 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 2000));
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  
+  // Submit to FormSubmit.co (replace with your email)
+  const formData = new FormData();
+  formData.append('name', formState.name);
+  formData.append('email', formState.email);
+  formData.append('company', formState.company);
+  formData.append('phone', formState.phone);
+  formData.append('service', formState.service);
+  formData.append('message', formState.message);
+  formData.append('_subject', 'New contact form submission - Quartz Group');
+  
+  try {
+    await fetch('https://formsubmit.co/csmalley@thequartzgroup.com', {
+      method: 'POST',
+      body: formData,
+    });
     setIsSubmitting(false);
     setIsSubmitted(true);
-  };
+  } catch (error) {
+    setIsSubmitting(false);
+    alert('Something went wrong. Please try again or email us directly at info@thequartzgroup.com.');
+  }
+};
 
   const contactInfo = [
     {
